@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Payment Portal</title>
+
+<style>
+body {
+    margin:0;
+    font-family: "Poppins",sans-serif;
+    background: repeating-linear-gradient(45deg, #2b5876 0px, #2b5876 20px, #4e4376 20px, #4e4376 40px); /* Totally NEW striped pattern */
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    height:100vh;
+}
+
+/* Card – Futuristic Glass Tile */
+.container {
+    width:400px;
+    padding:35px;
+    background: linear-gradient(135deg, #ffffff 0%, #f3f3f3 100%);
+    border-radius:20px;
+    box-shadow: 0 12px 25px rgba(0,0,0,0.25);
+    border: 2px solid #e0e0e0;
+    text-align:center;
+    color:#2b2b2b;
+}
+
+h1 {
+    margin-bottom:10px;
+    font-size:28px;
+    font-weight:bold;
+    text-transform:uppercase;
+    letter-spacing:1px;
+    color:#ffecf0;
+    text-shadow:0 2px 8px rgba(255,255,255,0.4);
+}
+
+input, select, button {
+    width:100%;
+    padding:14px;
+    margin:12px 0;
+    border-radius:14px;
+    border:none;
+    font-size:16px;
+    font-weight:500;
+}
+
+/* Neon Button – Cyan Glow */
+button {
+    background:#00eaff;
+    color:#003c3f;
+    cursor:pointer;
+    font-weight:bold;
+    transition:0.3s;
+    border:2px solid rgba(0,255,255,0.5);
+    box-shadow:0 0 12px rgba(0,255,255,0.6);
+}
+
+button:hover {
+    background:#a7faff;
+    box-shadow:0 0 20px rgba(0,255,255,0.9);
+    transform:scale(1.04);
+}
+
+/* Output box */
+#outputBox {
+    margin-top:15px;
+    padding:15px;
+    border-radius:15px;
+    background: linear-gradient(90deg,#d3f8ff,#e9fcff);
+    color:#00506b;
+    font-size:18px;
+    font-weight:bold;
+    display:none;
+    border-left:6px solid #0088aa;
+    border-right:6px solid #0088aa;
+    box-shadow:0 4px 12px rgba(0,0,0,0.2);
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+    <h1>💳 Payment Portal</h1>
+    <p>Secure payment with a new theme</p>
+
+    <div style="display:flex; gap:12px; width:100%; margin:15px 0;">
+        <div style="flex:1; text-align:left;">
+            <label>Enter Amount</label>
+            <input type="number" id="amount" placeholder="Enter amount">
+        </div>
+
+        <div style="flex:1; text-align:left;">
+            <label>Select Method</label>
+            <select id="method">
+                <option value="Credit Card">Credit Card</option>
+                <option value="UPI">UPI</option>
+                <option value="Net Banking">Net Banking</option>
+            </select>
+        </div>
+    </div>
+
+    <div style="display:flex; gap:12px; margin-top:10px;">
+        <button style="flex:1;" onclick="makePayment()">Make Payment</button>
+        <button style="flex:1; background:#777;" onclick="document.getElementById('outputBox').style.display='none'">Clear</button>
+    </div>
+
+    
+    <!-- Success message box -->
+    <div id="outputBox"></div>
+</div>
+
+<script>
+function makePayment() {
+    let amount = document.getElementById("amount").value.trim();
+    let method = document.getElementById("method").value;
+
+    if (!amount || Number(amount) <= 0) {
+        alert("Please enter a valid amount!");
+        return;
+    }
+
+    let message = `Payment of ₹${amount} done successfully using ${method}!`;
+
+    let box = document.getElementById("outputBox");
+    box.innerText = message;
+    box.style.display = "block";
+}
+</script>
+
+</body>
+</html>
