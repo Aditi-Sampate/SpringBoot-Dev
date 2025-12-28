@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en" class="h-full">
+<head>
+    <meta charset="UTF-8">
+    <title>Hospital Management Panel</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <style>
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        pre::-webkit-scrollbar {
+            width: 8px;
+        }
+        pre::-webkit-scrollbar-track {
+            background: #f0f0f0;
+            border-radius: 4px;
+        }
+        pre::-webkit-scrollbar-thumb {
+            background-color: #888;
+            border-radius: 4px;
+        }
+        pre::-webkit-scrollbar-thumb:hover {
+            background-color: #555;
+        }
+    </style>
+</head>
+
+<body class="bg-gradient-to-r from-blue-100 to-green-100 min-h-screen p-8 font-sans">
+
+<h1 class="text-5xl font-extrabold text-center mb-12 text-blue-800 drop-shadow-lg">
+    🏥 Hospital Management System
+</h1>
+
+<!-- MAIN BUTTONS -->
+<div class="flex justify-center gap-8 mb-12">
+    <button onclick="openSection('doctorSection')"
+            class="px-12 py-5 bg-gradient-to-r from-blue-500 to-blue-700 text-white text-2xl rounded-2xl shadow-lg hover:scale-105 transition-transform duration-300">
+        👨‍⚕️ Doctor
+    </button>
+
+    <button onclick="openSection('staffSection')"
+            class="px-12 py-5 bg-gradient-to-r from-green-500 to-green-700 text-white text-2xl rounded-2xl shadow-lg hover:scale-105 transition-transform duration-300">
+        👩‍💼 Staff
+    </button>
+</div>
+
+<!-- ==================== DOCTOR SECTION ==================== -->
+<div id="doctorSection" class="hidden mt-12 animate-[fadeIn_0.5s]">
+    <h2 class="text-3xl font-bold text-blue-800 mb-6 text-center drop-shadow">
+        Doctor Management
+    </h2>
+
+    <div class="flex flex-col lg:flex-row gap-8">
+        <!-- Add Doctor -->
+        <div class="bg-white p-6 rounded-2xl shadow-xl hover:shadow-2xl flex-1 transition-shadow duration-300">
+            <h3 class="text-2xl font-semibold mb-4 text-blue-600">Add Doctor</h3>
+            <input id="did" type="number" placeholder="ID" class="border p-3 w-full mb-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400">
+            <input id="dname" type="text" placeholder="Name" class="border p-3 w-full mb-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400">
+            <input id="daddress" type="text" placeholder="Address" class="border p-3 w-full mb-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400">
+            <input id="dspl" type="text" placeholder="Specialization" class="border p-3 w-full mb-4 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400">
+            <button onclick="addDoctor()" class="w-full py-3 bg-gradient-to-r from-blue-500 to-blue-700 text-white text-xl font-semibold rounded-xl shadow-lg hover:scale-105 transition-transform duration-300">
+                Save Doctor
+            </button>
+        </div>
+
+        <!-- Get Doctor -->
+        <div class="bg-white p-6 rounded-2xl shadow-xl hover:shadow-2xl flex-1 transition-shadow duration-300">
+            <h3 class="text-2xl font-semibold mb-4 text-purple-600">Get Doctor</h3>
+            <input id="dgetId" type="number" placeholder="Enter Doctor ID" class="border p-3 w-full mb-4 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-400">
+            <button onclick="getDoctor()" class="w-full py-3 bg-gradient-to-r from-purple-500 to-purple-700 text-white text-xl font-semibold rounded-xl shadow-lg hover:scale-105 transition-transform duration-300">
+                Get Doctor
+            </button>
+            <pre id="doctorResult" class="bg-gray-100 p-4 rounded mt-4 max-h-48 overflow-auto"></pre>
+        </div>
+
+        <!-- Delete Doctor -->
+        <div class="bg-white p-6 rounded-2xl shadow-xl hover:shadow-2xl flex-1 transition-shadow duration-300">
+            <h3 class="text-2xl font-semibold mb-4 text-red-600">Delete Doctor</h3>
+            <input id="ddelId" type="number" placeholder="Enter Doctor ID" class="border p-3 w-full mb-4 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-400">
+            <button onclick="deleteDoctor()" class="w-full py-3 bg-gradient-to-r from-red-500 to-red-700 text-white text-xl font-semibold rounded-xl shadow-lg hover:scale-105 transition-transform duration-300">
+                Delete Doctor
+            </button>
+        </div>
+    </div>
+</div>
+
+<!-- ==================== STAFF SECTION ==================== -->
+<div id="staffSection" class="hidden mt-12 animate-[fadeIn_0.5s]">
+    <h2 class="text-3xl font-bold text-green-800 mb-6 text-center drop-shadow">
+        Staff Management
+    </h2>
+
+    <div class="flex flex-col lg:flex-row gap-8">
+        <!-- Add Staff -->
+        <div class="bg-white p-6 rounded-2xl shadow-xl hover:shadow-2xl flex-1 transition-shadow duration-300">
+            <h3 class="text-2xl font-semibold mb-4 text-green-600">Add Staff</h3>
+            <input id="sid" type="number" placeholder="ID" class="border p-3 w-full mb-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-400">
+            <input id="sname" type="text" placeholder="Name" class="border p-3 w-full mb-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-400">
+            <input id="saddress" type="text" placeholder="Address" class="border p-3 w-full mb-4 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-400">
+            <button onclick="addStaff()" class="w-full py-3 bg-gradient-to-r from-green-500 to-green-700 text-white text-xl font-semibold rounded-xl shadow-lg hover:scale-105 transition-transform duration-300">
+                Save Staff
+            </button>
+        </div>
+
+        <!-- Get Staff -->
+        <div class="bg-white p-6 rounded-2xl shadow-xl hover:shadow-2xl flex-1 transition-shadow duration-300">
+            <h3 class="text-2xl font-semibold mb-4 text-indigo-600">Get Staff</h3>
+            <input id="sgetId" type="number" placeholder="Enter Staff ID" class="border p-3 w-full mb-4 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-400">
+            <button onclick="getStaff()" class="w-full py-3 bg-gradient-to-r from-indigo-500 to-indigo-700 text-white text-xl font-semibold rounded-xl shadow-lg hover:scale-105 transition-transform duration-300">
+                Get Staff
+            </button>
+            <pre id="staffResult" class="bg-gray-100 p-4 rounded mt-4 max-h-48 overflow-auto"></pre>
+        </div>
+
+        <!-- Delete Staff -->
+        <div class="bg-white p-6 rounded-2xl shadow-xl hover:shadow-2xl flex-1 transition-shadow duration-300">
+            <h3 class="text-2xl font-semibold mb-4 text-red-600">Delete Staff</h3>
+            <input id="sdelId" type="number" placeholder="Enter Staff ID" class="border p-3 w-full mb-4 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-400">
+            <button onclick="deleteStaff()" class="w-full py-3 bg-gradient-to-r from-red-500 to-red-700 text-white text-xl font-semibold rounded-xl shadow-lg hover:scale-105 transition-transform duration-300">
+                Delete Staff
+            </button>
+        </div>
+    </div>
+</div>
+
+<!-- ==================== JAVASCRIPT ==================== -->
+<script>
+    function openSection(section) {
+        document.getElementById("doctorSection").classList.add("hidden");
+        document.getElementById("staffSection").classList.add("hidden");
+        document.getElementById(section).classList.remove("hidden");
+    }
+
+    function clearInputs(ids) {
+        ids.forEach(id => document.getElementById(id).value = "");
+    }
+
+    // Doctor Functions
+    function addDoctor() {
+        let data = {
+            id: document.getElementById("did").value,
+            name: document.getElementById("dname").value,
+            address: document.getElementById("daddress").value,
+            spl: document.getElementById("dspl").value
+        };
+        fetch("http://localhost:8080/doctor/add", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(data) })
+            .then(r => { alert("Doctor Saved Successfully!"); clearInputs(["did","dname","daddress","dspl"]); });
+    }
+
+    function getDoctor() {
+        let id = document.getElementById("dgetId").value;
+        fetch("http://localhost:8080/doctor/" + id)
+            .then(r => r.json())
+            .then(data => { document.getElementById("doctorResult").innerText = JSON.stringify(data, null, 2); clearInputs(["dgetId"]); });
+    }
+
+    function deleteDoctor() {
+        let id = document.getElementById("ddelId").value;
+        fetch("http://localhost:8080/doctor/" + id, { method: "DELETE" })
+            .then(r => { alert("Doctor Deleted Successfully!"); clearInputs(["ddelId"]); });
+    }
+
+    // Staff Functions
+    function addStaff() {
+        let data = { id: document.getElementById("sid").value, name: document.getElementById("sname").value, address: document.getElementById("saddress").value };
+        fetch("http://localhost:8080/staff/add", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(data) })
+            .then(r => { alert("Staff Saved Successfully!"); clearInputs(["sid","sname","saddress"]); });
+    }
+
+    function getStaff() {
+        let id = document.getElementById("sgetId").value;
+        fetch("http://localhost:8080/staff/" + id)
+            .then(r => r.json())
+            .then(data => { document.getElementById("staffResult").innerText = JSON.stringify(data, null, 2); clearInputs(["sgetId"]); });
+    }
+
+    function deleteStaff() {
+        let id = document.getElementById("sdelId").value;
+        fetch("http://localhost:8080/staff/" + id, { method: "DELETE" })
+            .then(r => { alert("Staff Deleted Successfully!"); clearInputs(["sdelId"]); });
+    }
+</script>
+
+</body>
+</html>
