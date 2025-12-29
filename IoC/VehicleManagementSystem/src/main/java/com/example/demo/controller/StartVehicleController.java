@@ -1,0 +1,47 @@
+package com.example.demo.controller;
+import com.example.demo.serviceImpl.JeepServiceImpl;
+import com.example.demo.serviceImpl.ScootyServiceImpl;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.example.demo.service.VehicleService;
+import com.example.demo.serviceImpl.CarServiceImpl;
+
+@RestController
+@RequestMapping("vehicle")
+public class StartVehicleController {
+
+	
+	@Autowired
+	ApplicationContext applicationContext;
+	
+	@Autowired
+	VehicleService vehicleService;
+
+	
+	@GetMapping("start/{type}")
+	public String VehicleStart(@PathVariable String type)
+	{
+		if(type.equals("car"))
+		{
+			vehicleService = (VehicleService) applicationContext.getBean(CarServiceImpl.class);
+		}
+		else if(type.equals("jeep"))
+		{
+			vehicleService = (VehicleService) applicationContext.getBean(JeepServiceImpl.class);
+		}
+		else if(type.equals("scooty"))
+		{
+			vehicleService = (VehicleService) applicationContext.getBean(ScootyServiceImpl.class);
+		}
+		
+		
+		return vehicleService.startService();
+	}
+
+}
